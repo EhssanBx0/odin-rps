@@ -31,4 +31,14 @@ function playRound(humanSelection, computerSelection){
         }
 
     console.log(`Draw! You both chose ${humanSelection}`)
+};
+
+function playGame(){
+    while(humanScore === 3 || computerScore === 3){
+        let humanSelection = getHumanChoice();
+        let computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
+    }
+    if (humanScore === 3) console.log(`Player Wins Game! ${humanScore} rounds to ${computerScore}`);
+    if (computerScore === 3) console.log(`Computer Wins Game! ${computerScore} rounds to ${humanScore}`);
 }
