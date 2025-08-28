@@ -41,4 +41,6 @@ function playGame(){
     }
     if (humanScore === 3) console.log(`Player Wins Game! ${humanScore} rounds to ${computerScore}`);
     if (computerScore === 3) console.log(`Computer Wins Game! ${computerScore} rounds to ${humanScore}`);
+    humanScore = 0;
+    computerScore = 0;
 }
