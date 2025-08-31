@@ -9,6 +9,7 @@ function getHumanChoice(){
     return prompt("Select Rock, Paper or Scissors");
 };
 
+let roundCounter = 0;
 let humanScore = 0;
 let computerScore = 0;
 
@@ -44,3 +45,50 @@ function playGame(){
     humanScore = 0;
     computerScore = 0;
 }
+
+const playerSelectionBtns = document.querySelector(".playerSelectionBtns");
+const messageDisplay = document.querySelector(".messageDisplay");
+
+function playSelection(event){
+    if (!event.target.matches(".btn")) return;
+    
+    if (roundCounter === 0) messageDisplay.textContent = "";
+
+    let humanSelection = event.target.textContent.toLowerCase();
+    let computerSelection = getComputerChoice();
+
+    if (humanSelection === 'rock' && computerSelection === 'scissors' ||
+        humanSelection === 'paper' && computerSelection === 'rock' ||
+        humanSelection === 'scissors' && computerSelection === 'paper'){
+            humanScore++
+            messageDisplay.textContent += `\bYou Win! ${humanSelection} beats ${computerSelection}\n`;
+        }
+
+    if (humanSelection === 'rock' && computerSelection === 'paper' ||
+        humanSelection === 'paper' && computerSelection === 'scissors' ||
+        humanSelection === 'scissors' && computerSelection === 'rock'){
+            computerScore++
+            messageDisplay.textContent += `\bYou Lose! ${computerSelection} beats ${humanSelection}\n`;
+        }
+
+    if (humanSelection === computerSelection) {
+        messageDisplay.textContent += `\bDraw! You both chose ${humanSelection}\n`
+    }
+
+    roundCounter++
+
+    if (humanScore === 3) {
+        messageDisplay.textContent += `\bPlayer Wins Game! ${humanScore} rounds to ${computerScore}\n`;
+    }
+    if (computerScore === 3) {
+        messageDisplay.textContent += `\bComputer Wins Game! ${computerScore} rounds to ${humanScore}\n`;
+    }
+
+    if (humanScore === 3 || computerScore === 3){
+        humanScore = 0;
+        computerScore = 0;
+        roundCounter = 0;
+    }
+}
+
+playerSelectionBtns.addEventListener("click", playSelection)
